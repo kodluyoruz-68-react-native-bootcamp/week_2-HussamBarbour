@@ -18,14 +18,13 @@ const TodoForm = ({onAddTodo}) => {
         <View style={styles.container}>
             <TextInput testID="input"
             value={newTodoItem}
-            ref={input => { textInput = input }} 
             onChangeText={todoInputHandler}
             placeholder="Type someting to do.." style={styles.input} />
             <TouchableOpacity
                 testID="button"
                 onPress={addTodoHandler}
                 style={styles.submit} >
-                <Text>Add Todo</Text>
+                <Text style={styles.submitText}>Add Todo</Text>
             </TouchableOpacity>
         </View>
     );
@@ -35,21 +34,26 @@ export {TodoForm};
 
 const styles = StyleSheet.create({
     container: {
-      margin: 20,
+      margin: 0,
       padding: 20,
-      borderRadius: 20,
-      backgroundColor:  '#ccc',
+      backgroundColor:  '#ffffff',
     },
     input:{
-        backgroundColor: '#fff',
-        padding: 10,
+        borderWidth: 1,
+        fontSize: 20,
+        padding: 20,
         borderRadius: 5,
     },
     submit:{
-        backgroundColor: '#ddd',
-        padding: 10,
+        backgroundColor: '#2a9df4',
+        alignItems: 'center',
+        padding: 20,
         marginTop: 10,
         borderRadius: 5,
+    },
+    submitText:{
+        color: '#ffffff',
+        fontSize: 20,
     }
   });
   

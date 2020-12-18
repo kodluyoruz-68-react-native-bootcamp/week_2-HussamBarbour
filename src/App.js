@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, View, Text,FlatList, StyleSheet} from 'react-native';
 
 import {TodoForm,Item} from './components';
@@ -12,7 +12,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [count, updateCount] = useState(0);
   const renderItem = ({item}) => (
-    <Item onCheckItem={checkItem} onDelete={deleteItem} item={item}/>
+    <Item onToggle={checkItem} onLongPress={deleteItem} item={item}/>
   );
   function addItem(item) {
     setItems([...items, {id: Math.random().toString(),title:item, isDone: false}]);
@@ -24,6 +24,8 @@ function App() {
     }
     setItems(items.filter(item => item.id !== todo.id));
   }
+  
+  
   function checkItem({id}) {
     const checkItems = items.map(item =>{
         if (item.id === id){
@@ -46,11 +48,12 @@ function App() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Todo</Text>
-          <Text style={styles.count}>{count}</Text>
-        </View>
+        
         <View style={styles.body}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Todo</Text>
+            <View style={styles.countContainer}><Text style={styles.count}>{count}</Text></View>
+          </View>
           <FlatList testID="list"
             ListEmptyComponent={
               <Text style={styles.emptyText}>Empty..</Text>
@@ -74,30 +77,41 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eceff1',
+    backgroundColor: '#c2e5f5',
   },
   header:{
-    backgroundColor: 'white',
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    //alignItems: 'center',
-    margin: 16,
+    padding: 16,
+    borderBottomWidth: 1,
+    marginBottom: 15,
   },
   title: {
     fontSize: 50,
-    color: 'red'
+    color: 'blue'
+  },
+  emptyText : {
+    alignSelf: 'center',
+    fontSize : 26,
+    color: '#666'
+  },
+  countContainer: {
+    backgroundColor: '#ffffff',
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    borderRadius: 44/2,
   },
   count:{
     fontSize: 30,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   body: {
     marginHorizontal: 16,
     paddingVertical: 10,
-    flex: 3,
+    flex: 5,
   },
   footer: {
-    flex: 1,
+    flex: 2,
   }
 });
