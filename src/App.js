@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#c2e5f5',
+    justifyContent: 'space-between',
   },
   header:{
     flexDirection: 'row',
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
     flex: 5,
   },
   footer: {
+    justifyContent: 'flex-end',
     flex: 2,
   }
 });
